@@ -1,0 +1,60 @@
+Plan de Trabajo General (Actualizado e Integrado)
+Fase 1: Análisis de Requisitos y Diseño de Arquitectura
+
+Reunir los requisitos funcionales y definir casos de uso para:
+Landing page, E-commerce, Dashboard, Gestión de inventario y roles, Registro opcional/Guest Checkout.
+Revisar la arquitectura actual (FastAPI, React/Vite, Docker Compose, Traefik) y definir rutas y subdominios.
+Actualizar la documentación (README, deployment.md, development.md).
+[Prioridad 1] – Integración Landing Page y Catálogo de Productos
+
+(Ver sección anterior: tareas inmediatas para hoy)
+Fase 2: Diseño de UI/UX y Wireframes
+
+Recolección de nuevos assets (logos, paleta de colores, tipografías).
+Creación de wireframes y prototipos para la landing page, tienda y dashboard.
+Validación y ajustes en función del feedback.
+Fase 3: Desarrollo del Frontend – E-commerce y Catálogo
+
+Integrar la landing page con secciones para la tienda y “nosotros”.
+Implementar la visualización del catálogo, el carrito de compras y el proceso de checkout (incluyendo la opción de compra como invitado).
+Actualizar el ruteo y componentes en React.
+Fase 4: Desarrollo del Dashboard y Gestión de Inventario/Recursos
+
+Diseñar e implementar un panel de control para ventas, pedidos y reportes.
+Ampliar la API y la lógica del backend para gestionar inventario y roles (admin, empleado, etc.).
+Considerar la opción de usar Dash (o similar) si se prefiere desarrollar el dashboard en Python y desplegarlo en un contenedor separado.
+Fase 5: Implementación del Registro Opcional y Guest Checkout
+
+Ajustar los flujos de autenticación para permitir la compra sin registro.
+Crear flujos de registro opcional y conversión de usuario invitado a usuario registrado.
+Asegurar que la experiencia de usuario sea coherente en ambos casos.
+Fase 6: Integración, Pruebas y Despliegue
+
+Integrar todos los módulos y asegurar la comunicación entre contenedores (uso de Docker Compose y Traefik).
+Realizar pruebas unitarias, de integración y end-to-end.
+Optimizar performance, ajustar imágenes y compresión de assets.
+Actualizar la documentación y desplegar en entornos de staging y producción.
+Críticas y Sugerencias para Mejorar el Plan
+Detallar Roles y Permisos:
+
+Aunque se menciona la gestión de roles, sería útil detallar en el plan qué endpoints o áreas serán accesibles según cada rol (administrador, empleado, cliente, invitado). Esto ayudará a planificar la seguridad y el middleware de autenticación/autorización.
+Separación de Módulos:
+
+Si el catálogo de productos crece o se complejiza, considera separar la funcionalidad en microservicios. Esto es especialmente útil si la tienda y el dashboard tienen diferentes requerimientos de escalabilidad o tecnología.
+Pruebas Automatizadas:
+
+Asegúrate de incluir en el plan la creación o ampliación de tests automatizados (unitarios y end-to-end) para el CRUD de productos y la integración del catálogo en la landing page. Esto facilitará el mantenimiento a futuro.
+Feedback Continuo:
+
+Incluir ciclos cortos de feedback (por ejemplo, demos diarias o semanales) con stakeholders para validar la integración de la landing page y el catálogo, de forma que se puedan realizar ajustes tempranos.
+Optimización y Seguridad:
+
+Revisar el rendimiento y la seguridad de los endpoints del CRUD, especialmente en la gestión del stock. Considerar el uso de caché o colas si el volumen de operaciones es alto.
+Verificar que las operaciones de stock sean atómicas para evitar inconsistencias.
+Documentación y Comunicación:
+
+Asegúrate de documentar los nuevos endpoints, flujos de datos y cambios en la arquitectura en los documentos correspondientes. Esto facilitará la colaboración y el mantenimiento.
+Flexibilidad para Futuras Expansiones:
+
+Aunque el plan se centra en la integración inmediata, es importante dejar abiertas las opciones para ampliar funcionalidades (por ejemplo, integración con pasarelas de pago, notificaciones, etc.) y mencionar esto en el plan general.
+
