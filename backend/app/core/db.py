@@ -1,11 +1,17 @@
-from sqlmodel import Session, create_engine, select
-
+# app/core/db.py
 from app import crud
 from app.core.config import settings
 from app.models import User, UserCreate
+from sqlmodel import Session, create_engine, select # type: ignore
+from app.core.config import settings
 
+# Se crea el motor de conexión a la base de datos usando la URL generada a partir de settings
 engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
 
+def get_session() -> Session:
+    """Crea y retorna una sesión de la base de datos."""
+    with Session(engine) as session:
+        yield session
 
 # make sure all SQLModel models are imported (app.models) before initializing DB
 # otherwise, SQLModel might fail to initialize relationships properly

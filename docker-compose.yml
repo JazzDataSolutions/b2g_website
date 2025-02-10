@@ -196,6 +196,17 @@ services:
 
       # Enable redirection for HTTP and HTTPS
       - traefik.http.routers.${STACK_NAME?Variable not set}-frontend-http.middlewares=https-redirect
+
+  landing:
+    build: ./landing
+    ports:
+      - "3000:80"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000/api/v1
+    networks:
+      - traefik-public
+      - default
+
 volumes:
   app-db-data:
   pgadmin-data:

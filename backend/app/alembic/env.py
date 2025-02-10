@@ -27,6 +27,13 @@ target_metadata = SQLModel.metadata
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+import sys
+
+# Inserta el directorio que contiene "app" en el PYTHONPATH
+current_dir = os.path.abspath(os.path.dirname(__file__))
+parent_dir = os.path.abspath(os.path.join(current_dir, '..'))
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
 
 
 def get_url():

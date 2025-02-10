@@ -1,5 +1,5 @@
+# backend/app/models.py
 import uuid
-
 from pydantic import EmailStr
 from sqlmodel import Field, Relationship, SQLModel
 
@@ -112,3 +112,15 @@ class TokenPayload(SQLModel):
 class NewPassword(SQLModel):
     token: str
     new_password: str = Field(min_length=8, max_length=40)
+
+# Products
+
+class ProductoBase(SQLModel):
+    nombre: str = Field(..., max_length=255)
+    descripcion: str | None = Field(default=None, max_length=1024)
+    precio: float
+    stock: int
+    imagen_url: str | None = Field(default=None, max_length=255)
+
+class Producto(ProductoBase, table=True):
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
