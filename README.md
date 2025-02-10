@@ -2,11 +2,13 @@
 
 Brain2Gain es una tienda de suplementos que busca transformarse en una plataforma de comercio electrónico. Además de ofrecer una landing page que describa los productos y la misión de la marca, se planea que el sitio cuente con:
 
-E-commerce para venta de suplementos (con o sin registro).
-Panel de control (dashboard) de ventas para monitorear métricas y pedidos.
-Gestión de inventario y recursos, con distintos roles de usuario (admin, empleado, etc.).
-Registro de usuarios opcional para un seguimiento más personalizado, ofertas especiales y compra recurrente.
-Posibilidad de comprar como invitado, sin necesidad de iniciar sesión (guest checkout).
+    - E-commerce para venta de suplementos (con o sin registro).
+    - Panel de control (dashboard) de ventas para monitorear métricas y pedidos.
+    - Gestión de inventario y recursos, con distintos roles de usuario (admin, empleado, etc.).
+    - Registro de usuarios opcional para un seguimiento más personalizado, ofertas especiales y compra recurrente.
+    - Posibilidad de comprar como invitado, sin necesidad de iniciar sesión (guest checkout).
+
+    
 El proyecto se basa en la plantilla “Full Stack FastAPI + React” que incluye Docker Compose para entornos de desarrollo y producción, JWT para autenticación y configuración inicial para tests (Pytest y Playwright).
 
 ## Technology Stack and Features
