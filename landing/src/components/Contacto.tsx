@@ -3,73 +3,108 @@ import React from 'react';
 import {
   Box,
   Button,
-  Input,
   FormControl,
   FormLabel,
   FormErrorMessage,
-  Textarea
+  Input,
+  Textarea,
+  Heading,
+  VStack,
+  useToast,
 } from '@chakra-ui/react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-// Interfaz para los datos del formulario de contacto
 interface ContactoFormInputs {
   name: string;
   email: string;
   message: string;
 }
 
+const Contacto = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactoFormInputs>();
+  const toast = useToast();
 
-const Contacto: React.FC = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<ContactoFormInputs>();
-
-  // Función de envío tipada de forma explícita
-  const onSubmit: SubmitHandler<ContactoFormInputs> = async (data: ContactoFormInputs) => {
-    // Aquí se implementaría la lógica para enviar el correo o procesar el mensaje.
-    console.log('Datos de contacto:', data);
+  const onSubmit: SubmitHandler<ContactoFormInputs> = async (data) => {
+    // Aquí puedes integrar la llamada a FastAPI usando fetch, axios, etc.
+    // Por ahora, simulamos el envío.
+    console.log('Datos enviados:', data);
+    toast({
+      title: 'Mensaje enviado',
+      description: 'Gracias por contactarnos. Pronto nos pondremos en contacto contigo.',
+      status: 'success',
+      duration: 5000,
+      isClosable: true,
+    });
+    reset();
   };
 
   return (
-    <Box p={4}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <Box p={8}>
+      <Heading textAlign="center" mb={6}>
+        Contáctanos
+      </Heading>
+      <VStack
+        as="form"
+        spacing={4}
+        onSubmit={handleSubmit(onSubmit)}
+        maxW="600px"
+        mx="auto"
+      >
         <FormControl isInvalid={!!errors.name}>
           <FormLabel htmlFor="name">Nombre</FormLabel>
           <Input
             id="name"
-            type="text"
             placeholder="Tu nombre"
-            {...register("name", { required: "El nombre es obligatorio" })}
+            {...register('name', { required: 'El nombre es requerido' })}
           />
-          <FormErrorMessage>
-            {errors.name && errors.name.message}
-          </FormErrorMessage>
+          <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
         </FormControl>
-        <FormControl mt={4} isInvalid={!!errors.email}>
+
+        <FormControl isInvalid={!!errors.email}>
           <FormLabel htmlFor="email">Correo electrónico</FormLabel>
           <Input
             id="email"
             type="email"
-            placeholder="tu@correo.com"
-            {...register("email", { required: "El correo es obligatorio" })}
+            placeholder="tu@email.com"
+            {...register('email', {
+              required: 'El email es requerido',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Email inválido',
+              },
+            })}
           />
           <FormErrorMessage>
             {errors.email && errors.email.message}
           </FormErrorMessage>
         </FormControl>
-        <FormControl mt={4} isInvalid={!!errors.message}>
+
+        <FormControl isInvalid={!!errors.message}>
           <FormLabel htmlFor="message">Mensaje</FormLabel>
           <Textarea
             id="message"
-            placeholder="Tu mensaje"
-            {...register("message", { required: "El mensaje es obligatorio" })}
+            placeholder="Escribe tu mensaje..."
+            {...register('message', { required: 'El mensaje es requerido' })}
           />
           <FormErrorMessage>
             {errors.message && errors.message.message}
           </FormErrorMessage>
         </FormControl>
-        <Button mt={4} colorScheme="teal" type="submit">
-          Enviar mensaje
+
+        <Button
+          colorScheme="green"
+          isLoading={isSubmitting}
+          type="submit"
+          width="full"
+        >
+          Enviar
         </Button>
-      </form>
+      </VStack>
     </Box>
   );
 };

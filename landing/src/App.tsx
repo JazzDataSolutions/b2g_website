@@ -1,42 +1,26 @@
 // src/App.tsx
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import HeroSection from './components/HeroSection';
 import CatalogoPage from './components/CatalogoPage';
-import Dashboard from './components/Dashboard';
-import LoginPage from './components/LoginPage';
+import Conocenos from './components/Conocenos';
 import Contacto from './components/Contacto';
-import { Producto } from './components/CatalogoPage'; // o donde tengas definido el tipo
+import Footer from './components/Footer';
 
-const productosEjemplo: Producto[] = [
-  { 
-    id: 1, 
-    nombre: "Producto A", 
-    precio: 100, 
-    imagen: "/ruta/a/imagenA.jpg",
-    descripcion: "Descripción del producto A"  // propiedad agregada
-  },
-  { 
-    id: 2, 
-    nombre: "Producto B", 
-    precio: 200, 
-    imagen: "/ruta/a/imagenB.jpg",
-    descripcion: "Descripción del producto B"  // propiedad agregada
-  }
-];
-
-const usuarioEjemplo = { userName: "Juan", notifications: 5 };
-
-const App: React.FC = () => {
+const App = () => {
   return (
-    <BrowserRouter>
+    <>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<CatalogoPage productos={productosEjemplo} />} />
-        <Route path="/catalogo/*" element={<CatalogoPage productos={productosEjemplo} />} />
-        <Route path="/dashboard" element={<Dashboard userName={usuarioEjemplo.userName} notifications={usuarioEjemplo.notifications} />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<HeroSection />} />
+        <Route path="/catalogo" element={<CatalogoPage />} />
+        <Route path="/conocenos" element={<Conocenos />} />
         <Route path="/contacto" element={<Contacto />} />
+        {/* Agrega más rutas según sea necesario */}
       </Routes>
-    </BrowserRouter>
+      <Footer />
+    </>
   );
 };
 

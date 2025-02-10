@@ -1,7 +1,7 @@
 # landing/Dockerfile
 
 # Stage 1: Build
-FROM node:20 AS build
+FROM node:20 AS build-stage
 
 WORKDIR /app
 
@@ -20,9 +20,9 @@ RUN npm run build
 FROM nginx:1
 
 # Copia los archivos compilados a la carpeta que Nginx sirve
-COPY --from=build /app/dist/ /usr/share/nginx/html
+COPY --from=build-stage /app/dist/ /usr/share/nginx/html
 
-# Copia la configuración de Nginx (asegúrate de que el archivo exista en la ruta indicada)
+# Copia la configuración de Nginx personalizada
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
